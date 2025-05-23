@@ -5,7 +5,7 @@ import {
   Get,
   Param,
   Post,
-  Put,
+  Patch,
   Query,
 } from '@nestjs/common';
 
@@ -26,7 +26,7 @@ export class UsersController {
     return user;
   }
 
-  @Put(':id') // PUT /users/:id
+  @Patch(':id') // PATCH /users/:id
   update(@Param('id') id: string, @Body() userUpdate: {}) {
     return { id, ...userUpdate };
   }
