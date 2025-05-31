@@ -4,16 +4,24 @@ import { AppService } from './app.service';
 import { UsersModule } from './users/users.module';
 import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 import { APP_GUARD } from '@nestjs/core';
+import { MyLoggerModule } from './my-logger/my-logger.module';
 
 @Module({
   imports: [
     UsersModule,
     ThrottlerModule.forRoot([
       {
+        name: 'short',
+        ttl: 1000,
+        limit: 5,
+      },
+      {
+        name: 'long',
         ttl: 60000,
         limit: 100,
       },
     ]),
+    MyLoggerModule,
   ],
   controllers: [AppController],
   providers: [
